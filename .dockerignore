@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+.git
+.github
+.env
+.env.*
+google-vision-key.json
+nginx
+docker-compose.yml
+Jenkinsfile
+k8s

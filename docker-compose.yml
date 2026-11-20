@@ -1,9 +1,9 @@
 services:
   node:
-    container_name: node-container
+    container_name: bookridge-node
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3000"
     env_file:
       - .env
     restart: always
@@ -13,32 +13,15 @@ services:
       - bookridge-network
 
   mysql:
-    container_name: mysql-container
+    container_name: bookridge-mysql
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
       TZ: Asia/Seoul
       LANG: C.UTF-8
-    ports:
-      - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-    networks:
-      - bookridge-network
-
-  nginx:
-    container_name: nginx-container
-    image: nginx:latest
-    depends_on:
-      - node
-      - mysql
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - /etc/letsencrypt:/etc/letsencrypt:ro 
     networks:
       - bookridge-network
 
